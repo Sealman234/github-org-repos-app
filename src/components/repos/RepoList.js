@@ -4,6 +4,13 @@ import { apiGetRepos } from '../../api';
 import Repo from './Repo';
 import styled from 'styled-components';
 
+const ListTitle = styled.h2`
+  font-size: 1rem;
+  margin: 0;
+  font-weight: normal;
+  padding-bottom: 1rem;
+`;
+
 const StyledRepoList = styled.ul`
   padding: 0;
   margin: 0;
@@ -81,6 +88,7 @@ const RepoList = () => {
 
   return (
     <Fragment>
+      <ListTitle>Repositories</ListTitle>
       {repos.length > 0 && (
         <StyledRepoList>
           {repos.map((repo) => (
