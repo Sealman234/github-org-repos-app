@@ -7,6 +7,10 @@ const StyledRepo = styled.li`
   gap: 1rem;
   padding: 1rem;
   border-bottom: 1px solid #d8dee4;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
 `;
 
 const RepoTitle = styled.div`
@@ -14,10 +18,13 @@ const RepoTitle = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 0.625rem;
+
   > h3 {
     margin: 0;
+
     > a {
       text-decoration: none;
+      color: #0969da;
     }
   }
 `;
@@ -42,6 +49,7 @@ const Topics = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.25rem;
+
   > span {
     display: inline-block;
     padding: 0 7px;
@@ -58,7 +66,7 @@ const Topics = styled.div`
 
 const Repo = (props) => {
   return (
-    <StyledRepo key={props.id}>
+    <StyledRepo>
       <RepoTitle>
         <h3>
           <a href={props.svnUrl} target="_blank" rel="noreferrer">
@@ -73,7 +81,7 @@ const Repo = (props) => {
       {props.topics.length > 0 && (
         <Topics>
           {props.topics.map((topic) => (
-            <span>{topic}</span>
+            <span key={topic}>{topic}</span>
           ))}
         </Topics>
       )}

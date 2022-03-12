@@ -1,12 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import ToggleMode from '../header/ToggleMode';
-
 const Header = styled.header`
   display: flex;
   align-items: center;
-  padding: 8px;
+  padding: 8px 16px;
   box-shadow: inset 0 -1px 0 0 #dadce0;
 `;
 
@@ -31,7 +29,6 @@ const NavigationBar = ({ onToggleDarkMode }) => {
         alt="logo"
       />
       <SiteName>Repos</SiteName>
-      <ToggleMode onToggleDarkMode={onToggleDarkMode} />
     </Header>
   );
 };

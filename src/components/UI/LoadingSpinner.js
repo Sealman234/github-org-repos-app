@@ -12,17 +12,18 @@ const spinner = keyframes`
 
 const Spinner = styled.div`
   display: inline-block;
-  width: 80px;
-  height: 80px;
+  width: 48px;
+  height: 48px;
+
   &:after {
     content: ' ';
     display: block;
-    width: 64px;
-    height: 64px;
-    margin: 8px;
+    width: 32px;
+    height: 32px;
+    margin: 4px;
     border-radius: 50%;
-    border: 6px solid teal;
-    border-color: teal transparent teal transparent;
+    border: 4px solid #333;
+    border-color: #333 transparent #333 transparent;
     animation: ${spinner} 1.2s linear infinite;
   }
 `;
