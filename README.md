@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# GitHub Organization Repositories App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+串接 [GitHub REST API](https://docs.github.com/en/rest)，並使用 React 實作瀏覽單一 Organization 的 Repositories 網站。
 
-## Available Scripts
+## 如何啟動
 
-In the project directory, you can run:
+可以使用以下指令開啟專案：
+
+### `npm install`
+
+安裝 package.json 裡面的 Dependencies。
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+以開發模式啟動 App，可以開啟 [http://localhost:3000](http://localhost:3000) 在瀏覽器中檢視專案運行結果。
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 架構設計
 
-### `npm test`
+1. 以 CRA 建構專案並安裝所需套件
+2. 新增 Layout 樣式
+3. 創造 Axios Instance 管理 API
+4. 實作 Infinite Scroll 列表
+5. 加上 Debounce 減少觸發 Scroll 事件的頻率
+6. 處理 Loading、Error、Empty 等 UI Stack
+7. 實作篩選器功能
+8. 提取邏輯至 Redux 讓換頁與篩選時複用
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Features
 
-### `npm run build`
+- Infinite Scrolling Repository List
+- Filters
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Tech Stack
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [Create React App](https://github.com/facebook/create-react-app) - Set up a modern web app by running one command
+- [React](https://github.com/facebook/react/) - A declarative, efficient, and flexible JavaScript library for building user interfaces
+- [styled-components](https://github.com/styled-components/styled-components) - Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress
+- [React Router v6](https://github.com/remix-run/react-router) - Declarative routing for React
+- [Redux](https://github.com/reduxjs/redux) - Predictable state container for JavaScript apps
+- [Redux Toolkit](https://github.com/reduxjs/redux-toolkit) - The official, opinionated, batteries-included toolset for efficient Redux development
+- [Redux Thunk](https://github.com/reduxjs/redux-thunk) - Thunk middleware for Redux
+- [Firebase](https://firebase.google.com/) - Helps you build and run successful apps
+- [Axios](https://github.com/axios/axios) - Promise based HTTP client for the browser and node.js
