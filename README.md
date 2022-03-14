@@ -15,7 +15,7 @@
   - `pages`: page components
   - `components`
     - `layout`: components for building layout
-    - `repos`: components about showing repository list
+    - `repos`: components for showing repository list
     - `UI`: components for handling UI stack
   - `store`: handling Redux Toolkit
 
@@ -29,11 +29,11 @@
 實作方式：
 
 1. 以 CRA 建構專案並安裝所需套件，包含 styled-components、React Router、Redux Toolkit、Axios 等套件
-2. 新增頁面 Layout，設計 Container、Loading、Header 等樣式
-3. 創造 Axios Instance 用來管理 API
+2. 新增頁面 Layout，設計 Container、Loading、Header 等元件
+3. 創造 Axios Instance 管理 GitHub REST API
 4. 實作 Infinite Scroll 列表，並且透過 Debounce 減少觸發 Scroll 事件的頻率以提升效能
 5. 新增 Repo 列表 Loading、Error、Empty 等 UI Stack，改善使用體驗
-6. 實作篩選器功能，包含 Type、Sort、Direction
+6. 實作篩選器功能，包含 Type、Sort、Direction 等篩選方式
 7. 將元件中的 API 邏輯提取至 Redux，讓 Infinite Scroll 與篩選器都能複用相同的邏輯
 
 ## Tech Stack
