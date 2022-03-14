@@ -11,13 +11,13 @@
 
 ## 資料夾結構
 
-- src
+- `src`
   - `pages`: page components
-  - components
-    - layout: components for building layout
-    - repos: components about showing repository list
-    - UI: components for handling UI stack
-  - store: handling Redux Toolkit
+  - `components`
+    - `layout`: components for building layout
+    - `repos`: components about showing repository list
+    - `UI`: components for handling UI stack
+  - `store`: handling Redux Toolkit
 
 ## 功能設計
 
