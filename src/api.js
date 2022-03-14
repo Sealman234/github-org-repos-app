@@ -2,9 +2,6 @@ import axios from 'axios';
 
 const githubInstance = axios.create({
   baseURL: 'https://api.github.com',
-  headers: {
-    Authorization: 'token',
-  },
 });
 
 export const apiGetRepos = ({ page, type, sort, direction }) => {
