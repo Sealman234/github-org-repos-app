@@ -1,8 +1,12 @@
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
-import LoadingSpinner from '../UI/LoadingSpinner';
-import { apiGetRepos } from '../../api';
-import Repo from './Repo';
+import React, { Fragment, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+
+import LoadingSpinner from '../UI/LoadingSpinner';
+import Repo from './Repo';
+
+import { repoActions } from '../../store/repo-slice';
+import { fetchRepos } from '../../store/repo-actions';
 
 const ListTitle = styled.h2`
   font-size: 1rem;
@@ -31,29 +35,14 @@ const NoMoreData = styled.div`
 `;
 
 const RepoList = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasMore, setHasMore] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [repos, setRepos] = useState([]);
+  const dispatch = useDispatch();
+  const selectRepos = useSelector((state) => state.repo.repos);
+  const selectIsLoading = useSelector((state) => state.repo.isLoading);
+  const selectHasMore = useSelector((state) => state.repo.hasMore);
 
-  const fetchRepos = useCallback(async (currentPage) => {
-    try {
-      const data = {
-        page: currentPage,
-      };
-      const response = await apiGetRepos(data);
-      if (response.data.length) {
-        setRepos((prevState) => [...prevState, ...response.data]);
-      } else {
-        setHasMore(false);
-      }
-    } catch (error) {
-      console.log(error);
-      setHasMore(false);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+  useEffect(() => {
+    dispatch(fetchRepos());
+  }, [dispatch]);
 
   useEffect(() => {
     let timer = null;
@@ -66,11 +55,11 @@ const RepoList = () => {
         const scrollHeight = document.documentElement.scrollHeight;
         if (
           scrollTop + clientHeight >= scrollHeight - 350 &&
-          hasMore &&
-          !isLoading
+          selectHasMore &&
+          !selectIsLoading
         ) {
-          setIsLoading(true);
-          setCurrentPage((prevState) => (prevState += 1));
+          dispatch(repoActions.INCREMENT_PAGE());
+          dispatch(fetchRepos());
         }
       }, 250);
     };
@@ -80,18 +69,14 @@ const RepoList = () => {
     return () => {
       window.removeEventListener('scroll', onScroll);
     };
-  }, [hasMore, isLoading]);
-
-  useEffect(() => {
-    fetchRepos(currentPage);
-  }, [fetchRepos, currentPage]);
+  }, [dispatch, selectHasMore, selectIsLoading]);
 
   return (
     <Fragment>
       <ListTitle>Repositories</ListTitle>
-      {repos.length > 0 && (
+      {selectRepos.length > 0 && (
         <StyledRepoList>
-          {repos.map((repo) => (
+          {selectRepos.map((repo) => (
             <Repo
               key={repo.id}
               id={repo.id}
@@ -104,12 +89,14 @@ const RepoList = () => {
           ))}
         </StyledRepoList>
       )}
-      {isLoading && (
+      {selectIsLoading && (
         <LoadingSpinnerWrapper>
           <LoadingSpinner />
         </LoadingSpinnerWrapper>
       )}
-      {!hasMore && <NoMoreData>No more data!</NoMoreData>}
+      {!selectIsLoading && !selectHasMore && (
+        <NoMoreData>No more data!</NoMoreData>
+      )}
     </Fragment>
   );
 };

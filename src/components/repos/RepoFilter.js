@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { fetchRepos } from '../../store/repo-actions';
+import { repoActions } from '../../store/repo-slice';
 
 const OPTIONS_TYPE = [
   {
@@ -74,23 +77,26 @@ const StyledSelect = styled.select`
 `;
 
 const RepoFilter = () => {
-  const [type, setType] = useState('all');
-  const [sort, setSort] = useState('created');
-  const [direction, setDirection] = useState('asc');
+  const dispatch = useDispatch();
+  const selectType = useSelector((state) => state.repo.filterType);
+  const selectSort = useSelector((state) => state.repo.filterSort);
+  const selectDirection = useSelector((state) => state.repo.filterDirection);
 
-  const typeChangeHandler = (e) => {
-    setType(e.target.value);
-  };
-  const sortChangeHandler = (e) => {
-    setSort(e.target.value);
-  };
-  const directionChangeHandler = (e) => {
-    setDirection(e.target.value);
+  const changeHandler = (label) => {
+    return (event) => {
+      dispatch(repoActions.SET_FILTER({ label, value: event.target.value }));
+      dispatch(repoActions.RESET_REPOS());
+      dispatch(fetchRepos());
+    };
   };
 
   return (
     <SelectWrapper>
-      <StyledSelect name="type" value={type} onChange={typeChangeHandler}>
+      <StyledSelect
+        name="type"
+        value={selectType}
+        onChange={changeHandler('filterType')}
+      >
         <option value="" disabled>
           Select Type
         </option>
@@ -100,7 +106,11 @@ const RepoFilter = () => {
           </option>
         ))}
       </StyledSelect>
-      <StyledSelect name="sort" value={sort} onChange={sortChangeHandler}>
+      <StyledSelect
+        name="sort"
+        value={selectSort}
+        onChange={changeHandler('filterSort')}
+      >
         <option value="" disabled>
           Select Sort
         </option>
@@ -112,8 +122,8 @@ const RepoFilter = () => {
       </StyledSelect>
       <StyledSelect
         name="direction"
-        value={direction}
-        onChange={directionChangeHandler}
+        value={selectDirection}
+        onChange={changeHandler('filterDirection')}
       >
         <option value="" disabled>
           Select Direction
