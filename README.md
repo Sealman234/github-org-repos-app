@@ -12,12 +12,12 @@
 ## 資料夾結構
 
 - `src`
-  - `pages`: page components
+  - `pages`: Page components
   - `components`
-    - `layout`: components for building layout
-    - `repos`: components for showing repository list
-    - `UI`: components for handling UI stack
-  - `store`: handling Redux Toolkit
+    - `layout`: Building-block components for building layout
+    - `repos`: Building-block components for showing repository list
+    - `UI`: Building-block components for handling UI stack
+  - `store`: Handling state processing used by Redux Toolkit
 
 ## 功能設計
 
@@ -29,7 +29,7 @@
 實作方式：
 
 1. 以 CRA 建構專案並安裝所需套件，包含 styled-components、React Router、Redux Toolkit、Axios 等套件
-2. 新增頁面 Layout，設計 Container、Loading、Header 等元件
+2. 新增 Layout 與 Container、Loading、Header 等 Global 元件
 3. 創造 Axios Instance 管理 GitHub REST API
 4. 實作 Infinite Scroll 列表，並且透過 Debounce 減少觸發 Scroll 事件的頻率以提升效能
 5. 新增 Repo 列表 Loading、Error、Empty 等 UI Stack，改善使用體驗
