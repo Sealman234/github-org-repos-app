@@ -13,6 +13,7 @@ const ListTitle = styled.h2`
   margin: 0;
   font-weight: normal;
   padding-bottom: 1rem;
+  text-transform: capitalize;
 `;
 
 const StyledRepoList = styled.ul`
@@ -36,6 +37,7 @@ const NoMoreData = styled.div`
 
 const RepoList = () => {
   const dispatch = useDispatch();
+  const selectOrg = useSelector((state) => state.repo.org);
   const selectRepos = useSelector((state) => state.repo.repos);
   const selectIsLoading = useSelector((state) => state.repo.isLoading);
   const selectHasMore = useSelector((state) => state.repo.hasMore);
@@ -73,7 +75,7 @@ const RepoList = () => {
 
   return (
     <Fragment>
-      <ListTitle>Repositories</ListTitle>
+      <ListTitle>{selectOrg} Repositories</ListTitle>
       {selectRepos.length > 0 && (
         <StyledRepoList>
           {selectRepos.map((repo) => (

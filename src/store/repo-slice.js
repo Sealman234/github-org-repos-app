@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  org: 'vuejs',
   repos: [],
   isLoading: false,
   hasMore: true,
@@ -14,6 +15,9 @@ const repoSlice = createSlice({
   name: 'repo',
   initialState,
   reducers: {
+    SET_ORG(state, action) {
+      state.org = action.payload;
+    },
     SET_LOADING(state, action) {
       state.isLoading = action.payload;
     },
@@ -31,6 +35,14 @@ const repoSlice = createSlice({
     },
     RESET_REPOS(state) {
       state.repos = [];
+      state.isLoading = false;
+      state.hasMore = true;
+      state.currentPage = 1;
+    },
+    RESET_FILTERS(state) {
+      state.filterType = 'all';
+      state.filterSort = 'created';
+      state.filterDirection = 'asc';
     },
   },
 });

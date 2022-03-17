@@ -4,11 +4,12 @@ import { repoActions } from './repo-slice';
 export const fetchRepos = () => {
   return async (dispatch, getState) => {
     dispatch(repoActions.SET_LOADING(true));
-    const { currentPage, filterType, filterSort, filterDirection } =
+    const { org, currentPage, filterType, filterSort, filterDirection } =
       getState().repo;
 
     const fetchRequest = async () => {
       const data = {
+        org: org,
         page: currentPage,
         type: filterType,
         sort: filterSort,

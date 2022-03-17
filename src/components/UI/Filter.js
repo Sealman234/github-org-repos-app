@@ -17,8 +17,8 @@ const Filter = ({ name, label, options }) => {
 
   const changeHandler = (label) => {
     return (event) => {
-      dispatch(repoActions.SET_FILTER({ label, value: event.target.value }));
       dispatch(repoActions.RESET_REPOS());
+      dispatch(repoActions.SET_FILTER({ label, value: event.target.value }));
       dispatch(fetchRepos());
     };
   };
