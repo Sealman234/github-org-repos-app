@@ -21,13 +21,6 @@
 
 ## 功能設計
 
-實作面主要圍繞在以下兩項功能：
-
-- Infinite Scrolling Repository List
-- Filters
-
-實作方式：
-
 1. 以 CRA 建構專案並安裝所需套件，包含 styled-components、React Router、Redux Toolkit、Axios 等套件
 2. 新增 Layout 與 Container、Loading、Header 等 Global 元件
 3. 創造 Axios Instance 管理 GitHub REST API
