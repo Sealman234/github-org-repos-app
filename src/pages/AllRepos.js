@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
-import RepoFilter from '../components/repos/RepoFilter';
+import RepoFilters from '../components/repos/RepoFilters';
 import RepoList from '../components/repos/RepoList';
 
 const AllRepos = () => {
   return (
     <Fragment>
-      <RepoFilter />
+      <RepoFilters />
       <RepoList />
     </Fragment>
   );
