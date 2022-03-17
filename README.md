@@ -35,6 +35,7 @@
 5. 新增 Repo 列表 Loading、Error、Empty 等 UI Stack，改善使用體驗
 6. 實作篩選器功能，包含 Type、Sort、Direction 等篩選方式
 7. 將元件中的 API 邏輯提取至 Redux，讓 Infinite Scroll 與篩選器都能複用相同的邏輯
+8. 新增搜尋 Organization 功能
 
 ## Tech Stack
 
