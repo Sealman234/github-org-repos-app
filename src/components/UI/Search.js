@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
+import { useSelector } from 'react-redux';
 
 const FormWrapper = styled.div`
   display: flex;
@@ -28,9 +29,16 @@ const Button = styled.button`
 
 const Search = ({ onSubmit }) => {
   const inputRef = useRef();
+  const selectOrg = useSelector((state) => state.repo.org);
 
   const submitHandler = (event) => {
     event.preventDefault();
+    if (
+      inputRef.current.value.trim() === '' ||
+      inputRef.current.value === selectOrg
+    )
+      return;
+
     onSubmit(inputRef.current.value);
   };
 
