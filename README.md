@@ -1,15 +1,23 @@
 # GitHub Organization Repositories App
 
-本專案是串接 [GitHub REST API](https://docs.github.com/en/rest)，並使用 React 實作瀏覽單一 Organization 的 Repositories 網站。
+透過串接 [GitHub REST API](https://docs.github.com/en/rest)，使用 React 實作出可搜尋單一 Organization，並瀏覽其 Repositories 的網站。
 
-## How to use
+## Features
 
-可以使用以下指令執行專案：
+- Searching for a specific organization's repositories
+- Infinite Scrolling Repository list
+- Sorting and Filtering repositories
+
+**TL;DR** [the demo page](https://github-org-repos-app.web.app/repos)
+
+## Usage
+
+將專案下載至本地後，您可以使用以下指令，在 Localhost 中執行此專案：
 
 - `npm install`：安裝 package.json 裡面的 Dependencies
 - `npm start`：啟動 App，可以在瀏覽器中訪問 [http://localhost:3000](http://localhost:3000) 檢視專案
 
-## 資料夾結構
+## Folder Structure
 
 - `src`
   - `pages`: Page components
@@ -19,16 +27,16 @@
     - `UI`: Building-block components for handling UI stack
   - `store`: Handling state processing used by Redux Toolkit
 
-## 功能設計
+## 實作方式與功能設計
 
-1. 以 CRA 建構專案並安裝所需套件，包含 styled-components、React Router、Redux Toolkit、Axios 等套件
-2. 新增 Layout 與 Container、Loading、Header 等 Global 元件
-3. 創造 Axios Instance 管理 GitHub REST API
+1. 以 CRA 建構專案並安裝所需套件，包含 styled-components、React Router、Redux Toolkit、Axios 等等，可在 `package.json` 中查看使用了哪些套件
+2. 新增 Layout、Container、Loading、Header 等元件，建立網站的基礎外觀樣式
+3. 創造 Axios Instance 來管理 GitHub REST API
 4. 實作 Infinite Scroll 列表，並且透過 Debounce 減少觸發 Scroll 事件的頻率以提升效能
-5. 新增 Repo 列表 Loading、Error、Empty 等 UI Stack，改善使用體驗
-6. 實作篩選器功能，包含 Type、Sort、Direction 等篩選方式
-7. 將元件中的 API 邏輯提取至 Redux，讓 Infinite Scroll 與篩選器都能複用相同的邏輯
-8. 新增搜尋 Organization 功能
+5. 為 Repositories 列表新增 Loading、Error、Empty 等 UI Stack，改善使用上的體驗
+6. 實作篩選器功能，可用 Type、Sort、Direction 等方式進行篩選
+7. 將 API 等非同步行為從 Components 提取至 Action Creators，讓 Infinite Scroll 與 Filters 重複使用邏輯，也讓元件更精簡
+8. 新增搜尋 Organization 功能，並且避免空值、重複查詢等情況
 
 ## Tech Stack
 
