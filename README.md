@@ -20,11 +20,11 @@
 ## Folder Structure
 
 - `src`
-  - `pages`: Page components
+  - `pages`: Page components，每個獨立頁面的元件
   - `components`
-    - `layout`: Building-block components for building layout
-    - `repos`: Building-block components for showing repository list
-    - `UI`: Building-block components for handling UI stack
+    - `layout`: Global components，在每個頁面都會出現的元件，像是 Header 或 Footer 等等
+    - `repos`: Repository 列表會用到的 Building-block components
+    - `UI`: 拆分 Global components 所產出的 Building-block components，用來 Handle UI stack
   - `store`: Handling state processing used by Redux Toolkit
 
 ## 實作方式與功能設計
