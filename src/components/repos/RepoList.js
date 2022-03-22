@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
@@ -42,36 +42,64 @@ const RepoList = () => {
   const selectIsLoading = useSelector((state) => state.repo.isLoading);
   const selectHasMore = useSelector((state) => state.repo.hasMore);
 
+  const listEndRef = useRef();
+
+  useEffect(() => {
+    let observerRefValue = null; // variable to hold ref value
+
+    // Interception Handler
+    const callback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && selectHasMore && !selectIsLoading) {
+          dispatch(repoActions.INCREMENT_PAGE());
+          dispatch(fetchRepos());
+        }
+      });
+    };
+    // Observe the end of the list
+    let observer = new IntersectionObserver(callback, {
+      threshold: 0,
+    });
+    if (listEndRef.current) {
+      observer.observe(listEndRef.current);
+      observerRefValue = listEndRef.current; // save ref value
+    }
+
+    return () => {
+      if (observerRefValue) observer.unobserve(observerRefValue); // use saved value
+    };
+  }, [dispatch, listEndRef, selectHasMore, selectIsLoading]);
+
   useEffect(() => {
     dispatch(fetchRepos());
   }, [dispatch]);
 
-  useEffect(() => {
-    let timer = null;
+  // useEffect(() => {
+  //   let timer = null;
 
-    const onScroll = () => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        const scrollTop = document.documentElement.scrollTop;
-        const clientHeight = document.documentElement.clientHeight;
-        const scrollHeight = document.documentElement.scrollHeight;
-        if (
-          scrollTop + clientHeight >= scrollHeight - 350 &&
-          selectHasMore &&
-          !selectIsLoading
-        ) {
-          dispatch(repoActions.INCREMENT_PAGE());
-          dispatch(fetchRepos());
-        }
-      }, 250);
-    };
+  //   const onScroll = () => {
+  //     clearTimeout(timer);
+  //     timer = setTimeout(() => {
+  //       const scrollTop = document.documentElement.scrollTop;
+  //       const clientHeight = document.documentElement.clientHeight;
+  //       const scrollHeight = document.documentElement.scrollHeight;
+  //       if (
+  //         scrollTop + clientHeight >= scrollHeight - 350 &&
+  //         selectHasMore &&
+  //         !selectIsLoading
+  //       ) {
+  //         dispatch(repoActions.INCREMENT_PAGE());
+  //         dispatch(fetchRepos());
+  //       }
+  //     }, 250);
+  //   };
 
-    window.addEventListener('scroll', onScroll);
+  //   window.addEventListener('scroll', onScroll);
 
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-    };
-  }, [dispatch, selectHasMore, selectIsLoading]);
+  //   return () => {
+  //     window.removeEventListener('scroll', onScroll);
+  //   };
+  // }, [dispatch, selectHasMore, selectIsLoading]);
 
   return (
     <Fragment>
@@ -91,6 +119,7 @@ const RepoList = () => {
           ))}
         </StyledRepoList>
       )}
+      <div ref={listEndRef} />
       {selectIsLoading && (
         <LoadingSpinnerWrapper>
           <LoadingSpinner />
