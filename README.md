@@ -1,23 +1,27 @@
 # GitHub Organization Repositories App
 
-透過串接 [GitHub REST API](https://docs.github.com/en/rest)，使用 React 實作出可搜尋單一 Organization，並瀏覽其 Repositories 的網站。
+透過串接 [GitHub REST API](https://docs.github.com/en/rest)，讓我們可以直接快速地搜尋並瀏覽某一個 Organization 的所有 Repository。
 
-## Features
+## 實作功能
 
-- Searching for a specific organization's repositories
-- Infinite Scrolling Repository list
-- Sorting and Filtering repositories
+- 搜尋與瀏覽特定 Organization 的 Repositories
+- 使用 Infinite Scroll 載入更多資料
+- 篩選與排序
 
 **TL;DR** [the demo page](https://github-org-repos-app.web.app/repos)
 
-## Usage
+## 如何使用
 
-將專案下載至本地後，您可以使用以下指令，在 Localhost 中執行此專案：
+將專案下載至本地後，您可以使用以下指令，在 localhost 中執行此專案：
 
 - `npm install`：安裝 package.json 裡面的 Dependencies
 - `npm start`：啟動 App，可以在瀏覽器中訪問 [http://localhost:3000](http://localhost:3000) 檢視專案
 
 ## Folder Structure
+
+架構方面，我習慣將 Components 區分為 Page、Global、UI 三個種類，在本專案中分別對應到 pages、components/layout、components/UI 這三個資料夾。
+
+至於 components/repos 則是一般頁面上用到的元件，雖然它並沒有被共用，但由於我希望讓專案裡的元件盡量不要超過 300 行，因此我也對這個部分做了元件的拆分，目的是減少耦合，並增加可讀性。
 
 - `src`
   - `pages`: Page components，每個獨立頁面的元件
@@ -27,7 +31,7 @@
     - `UI`: 拆分 Global components 所產出的 Building-block components，用來 Handle UI stack
   - `store`: Handling state processing used by Redux Toolkit
 
-## 實作方式與功能設計
+## 實作步驟、實作方式、功能設計
 
 1. 以 CRA 建構專案並安裝所需套件，包含 styled-components、React Router、Redux Toolkit、Axios 等等，可在 `package.json` 中查看使用了哪些套件
 2. 新增 Layout、Container、Loading、Header 等元件，建立網站的基礎外觀樣式
