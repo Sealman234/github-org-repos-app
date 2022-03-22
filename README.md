@@ -37,6 +37,7 @@
 6. 實作篩選器功能，可用 Type、Sort、Direction 等方式進行篩選
 7. 將 API 等非同步行為從 Components 提取至 Action Creators，讓 Infinite Scroll 與 Filters 重複使用邏輯，也讓元件更精簡
 8. 新增搜尋 Organization 功能，並且避免空值、重複查詢等情況
+9. 改以 Intersection Observer API 實作 Infinite Scroll，改善效能負擔問題
 
 ## Tech Stack
 
